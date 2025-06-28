@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { ethers } from 'ethers';
 import { toast } from 'react-toastify';
 import { nftmarketaddress } from '../config';
-import Market from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
+import Market from '../contracts/NFTMarketplace.json';
 import { WalletContext } from '../App';
 
 import LoadingSpinner from './LoadingSpinner';

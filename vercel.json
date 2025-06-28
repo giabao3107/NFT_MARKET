@@ -24,5 +24,7 @@
   ],
   "env": {
     "GENERATE_SOURCEMAP": "false"
-  }
+  },
+  "buildCommand": "npm run compile && npm run build",
+  "installCommand": "npm install"
 } 

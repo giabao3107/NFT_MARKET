@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 import NFTCard from '../components/NFTCard';
 import NFTDetailsModal from '../components/NFTDetailsModal';
 import { nftaddress, nftmarketaddress } from '../config';
-import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
-import Market from '../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
+import NFT from '../contracts/NFT.json';
+import Market from '../contracts/NFTMarketplace.json';
 import { WalletContext } from '../App';
 import './Marketplace.css';
 
