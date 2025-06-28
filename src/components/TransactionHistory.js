@@ -55,9 +55,9 @@ export default function TransactionHistory() {
 
       console.log('🔍 Loading transaction history for:', account);
 
-      // Get seller payment events
-      const sellerPaidFilter = contract.filters.SellerPaid(account);
-      const sellerPaidEvents = await contract.queryFilter(sellerPaidFilter, fromBlock);
+      // Get payment processed events for this account
+      const paymentProcessedFilter = contract.filters.PaymentProcessed(account);
+      const paymentProcessedEvents = await contract.queryFilter(paymentProcessedFilter, fromBlock);
 
 
 
@@ -71,18 +71,25 @@ export default function TransactionHistory() {
       // Combine and format transactions
       const allTransactions = [];
 
-      // Add seller payments
-      for (const event of sellerPaidEvents) {
+      // Add payment processed events
+      for (const event of paymentProcessedEvents) {
         const block = await provider.getBlock(event.blockNumber);
-        allTransactions.push({
-          id: `seller-${event.transactionHash}-${event.logIndex}`,
-          type: 'seller_payment',
-          amount: ethers.utils.formatEther(event.args.amount),
-          itemId: event.args.itemId.toString(),
-          timestamp: block.timestamp,
-          txHash: event.transactionHash,
-          description: 'Nhận tiền bán NFT'
-        });
+        const eventType = event.args.eventType;
+        
+        // Only show seller-related payments
+        if (eventType === 'SELLER_PAYMENT' || eventType === 'CLAIM' || eventType === 'WITHDRAWAL' || eventType === 'REVENUE_CLAIM') {
+          allTransactions.push({
+            id: `payment-${event.transactionHash}-${event.logIndex}`,
+            type: 'seller_payment',
+            amount: ethers.utils.formatEther(event.args.amount),
+            itemId: event.args.itemId.toString(),
+            timestamp: block.timestamp,
+            txHash: event.transactionHash,
+            description: eventType === 'CLAIM' ? 'Rút tiền từ bán NFT' : 
+                        eventType === 'WITHDRAWAL' ? 'Rút tiền từ ví' :
+                        eventType === 'REVENUE_CLAIM' ? 'Nhận doanh thu' : 'Nhận tiền bán NFT'
+          });
+        }
       }
 
 
