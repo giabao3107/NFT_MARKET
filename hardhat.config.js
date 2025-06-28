@@ -51,4 +51,4 @@ module.exports = {
             accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],      
             chainId: 11155111    },    
             mainnet: {      url: "https://mainnet.infura.io/v3/8e7323d7fd6e47e6ba293c62820e4314",      
-            accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],      chainId: 1    },    polygon: {      url: "https://polygon-mainnet.infura.io/v3/8e7323d7fd6e47e6ba293c62820e4314",      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],      chainId: 137    }  },  paths: {    artifacts: "./src/artifacts",  },}; 
+            accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],      chainId: 1    },    polygon: {      url: "https://polygon-mainnet.infura.io/v3/8e7323d7fd6e47e6ba293c62820e4314",      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],      chainId: 137    }  },}; 
